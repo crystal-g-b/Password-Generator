@@ -7,7 +7,7 @@ var lettersLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", 
 var lettersUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numChoice = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialChar = [" ", "!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "~", "}", "{", "|", "_", "^" ];
-var allCriteria = [ ]
+
 //Create user input Variables
 
 var passwordLength;
@@ -56,75 +56,43 @@ var passwordCriteria = function() {
         yesLettersUpper = confirm("Will password contain uppercase letters?");
         yesNumCharacters = confirm("Will password contain numeric characters?");
         yesSpecialCharacters = confirm("Will password contain special characters?");
-    
-    } else if (yesLettersLower && yesLettersUpper && yesNumCharacters && yesSpecialCharacters) {
-        passwordOptions = lettersLower.concat(lettersUpper, numChoice, specialChar);
-    
-    } else if (yesLettersLower && yesLettersUpper && yesNumCharacters) {
-        passwordOptions = lettersLower.concat(lettersUpper, numChoice);
+    } 
 
-    } else if (yesLettersUpper && yesNumCharacters && yesSpecialCharacters) {
-        passwordOptions = lettersUpper.concat(numChoice, specialChar);
+    var passwordOptions = [];
 
-    } else if (yesNumCharacters && yesSpecialCharacters && yesLettersLower) {
-        passwordOptions = numChoice.concat(specialChar, lettersLower);
+    if (yesLettersLower) {
+        passwordOptions = passwordOptions.concat(lettersLower)
+    }
 
-    } else if (yesLettersLower && yesLettersUpper && yesSpecialCharacters); {
-        passwordOptions = lettersLower.concat(lettersUpper, specialChar);
-   
-    }  if (yesLettersLower && yesLettersUpper) {
-        passwordOptions = lettersLower.concat(lettersUpper);
+    if (yesLettersUpper) {
+        passwordOptions = passwordOptions.concat(lettersUpper)
+    }
+       
+    if (yesNumCharacters) {
+        passwordOptions = passwordOptions.concat(numChoice)
+    }
 
-    } else if (yesLettersUpper && yesNumCharacters) {
-        passwordOptions = lettersUpper.concat(numChoice);  
+    if (yesSpecialCharacters) {
+        passwordOptions = passwordOptions.concat(specialChar)
+    }
 
-    } else if (yesNumCharacters && yesSpecialCharacters) {
-        passwordOptions = numChoice.concat(specialChar);
-
-    } else if (yesSpecialCharacters && yesLettersLower) {
-        passwordOptions = specialChar.concat(yesLettersLower);
-
-    } else if (yesSpecialCharacters && yesLettersUpper) {
-        passwordOptions = specialChar.concat(lettersUpper);
-
-    } else if (yesNumCharacters && yesLettersLower) {
-        passwordOptions = numChoice.concat(lettersLower);
-
-    } else if (yesLettersLower) {
-        passwordOptions = lettersLower;
-    
-    } else if (yesLettersUpper) {
-        passwordOptions = lettersUpper;
-
-    } else if (yesNumCharacters) {
-        passwordOptions = numChoice;
-
-    } else if (yesSpecialCharacters) {
-        passwordOptions = specialChar;
-    };
-
-    console.log(passwordOptions);
-
-    var randomPassword = [];
+    var randomPassword = "";
 
     for (var i = 0; i < passwordLength; i++) {
-        var pickedOptions = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
-        
+        randomPassword = randomPassword + passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
     }
 }
 
 
-
-
-
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
+    var password = passwordCriteria();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", passwordCriteria);
+//document.getElementById("password").textContent = randomPassword; 
+//document.querySelector("#generate").addEventListener("click", writePassword);
+
+
+generateBtn.addEventListener("click", writePassword);
