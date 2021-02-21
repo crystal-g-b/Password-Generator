@@ -104,6 +104,13 @@ var passwordCriteria = function() {
     };
 
     console.log(passwordOptions);
+
+    var randomPassword = [];
+
+    for (var i = 0; i < passwordLength; i++) {
+        var pickedOptions = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
+        
+    }
 }
 
 
