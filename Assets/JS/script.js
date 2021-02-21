@@ -53,7 +53,8 @@ var passwordCriteria = function() {
         yesNumCharacters = confirm("Will password contain numeric characters?");
         yesSpecialCharacters = confirm("Will password contain special characters?");
     }; 
-
+    
+    //Creating options for the password parameters
     var passwordOptions = []
 
     if (yesLettersLower) {
@@ -73,6 +74,8 @@ var passwordCriteria = function() {
     };
 
     var randomPassword = "";
+
+    //Create loop so that password generated is random every time
 
     for (var i = 0; i < passwordLength; i++) {
         randomPassword = randomPassword + passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
