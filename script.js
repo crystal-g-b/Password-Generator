@@ -1,26 +1,22 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var passwordText = document.querySelector("#password");
 
 //Create user input Arrays
 var lettersLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var lettersUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var numChoice = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var numChoice = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var specialChar = [" ", "!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "~", "}", "{", "|", "_", "^" ];
 
 //Create user input Variables
 
-var passwordLength;
+var passwordLength = "";
 var yesLettersLower;
 var yesLettersUpper;
 var yesNumCharacters;
 var yesSpecialCharacters;
 
-var passwordOptions = "";
 
 //Create criteria prompt
-
-generateBtn.addEventListener("click", passwordCriteria);
 
 var passwordCriteria = function() {
     var passwordLength = window.prompt("What is your prefered password length?");
@@ -56,31 +52,32 @@ var passwordCriteria = function() {
         yesLettersUpper = confirm("Will password contain uppercase letters?");
         yesNumCharacters = confirm("Will password contain numeric characters?");
         yesSpecialCharacters = confirm("Will password contain special characters?");
-    } 
+    }; 
 
-    var passwordOptions = [];
+    var passwordOptions = []
 
     if (yesLettersLower) {
         passwordOptions = passwordOptions.concat(lettersLower)
-    }
-
-    if (yesLettersUpper) {
+      }
+      
+      if (yesLettersUpper) {
         passwordOptions = passwordOptions.concat(lettersUpper)
-    }
+      }
        
-    if (yesNumCharacters) {
+      if (yesNumCharacters) {
         passwordOptions = passwordOptions.concat(numChoice)
-    }
-
-    if (yesSpecialCharacters) {
+      }
+      
+      if (yesSpecialCharacters) {
         passwordOptions = passwordOptions.concat(specialChar)
-    }
+    };
 
     var randomPassword = "";
 
     for (var i = 0; i < passwordLength; i++) {
         randomPassword = randomPassword + passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
     }
+    return randomPassword;
 }
 
 
@@ -88,11 +85,8 @@ var passwordCriteria = function() {
 function writePassword() {
     var password = passwordCriteria();
     var passwordText = document.querySelector("#password");
+   
     passwordText.value = password;
 }
-
-//document.getElementById("password").textContent = randomPassword; 
-//document.querySelector("#generate").addEventListener("click", writePassword);
-
 
 generateBtn.addEventListener("click", writePassword);
